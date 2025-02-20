@@ -1,3 +1,5 @@
+// The explore page
+
 import { StyleSheet, Image, Platform } from 'react-native';
 
 import { Collapsible } from '@/components/Collapsible';
