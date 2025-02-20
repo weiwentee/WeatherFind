@@ -1,47 +1,30 @@
 // The bottom navigation tab
 
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
+import React from 'react'
+import{View, Text, SafeAreaView, TextInput, StatusBar, Image, TouchableOpacity} from 'react-native'
 import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import {MagnifyingGlassIcon} from 'react-native-heroicons/outline'
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+export default function HomeScreen() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
-        }}
+    <View style= {{flex: 1, position: 'relative' }}>
+      <StatusBar barStyle='light-content' />
+      <Image blurRadius={70} source={require('../../assets/images/bg.jpg')}
+        style= {{position: 'absolute', height: '100%' , width: '100%', resizeMode: 'cover'}}
       />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
-  );
+      <SafeAreaView style={{flex: 1}}>
+        {/* Search Section */}
+        <View style={{height: 50, marginHorizontal: 16, position: 'relative', zIndex: 50}}>
+          <View 
+            style={{ flexDirection: 'row', alignItems: 'center', borderRadius: 50, backgroundColor: Colors.bgWhite(0.2), paddingHorizontal: 16, paddingVertical: 15}}>
+              <TextInput placeholder='Search City' placeholderTextColor='white' style={{ flex:1, color: 'white', fontSize: 16}}/>
+              <TouchableOpacity
+                style={{backgroundColor: Colors.bgWhite(0.2), padding: 10, borderRadius: 50}}>
+                  <MagnifyingGlassIcon color='white' size={20}/>
+              </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
+    </View>
+  )
 }
